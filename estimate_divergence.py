@@ -311,7 +311,7 @@ def main():
     p.add_argument("--n_sets", type=int, default=1000)
     p.add_argument("--n_fine", type=int, default=100)
     p.add_argument("--n_blocks", type=int, default=1000, help="total bootstrap blocks")
-    p.add_argument("--n_boot", type=int, default=10000)
+    p.add_argument("--n_boot", type=int, default=1000)
     p.add_argument("--seed", type=int, default=1)
     p.add_argument("--dump_rates", action="store_true",
                    help="also save <output>_rates.npz with the per-bootstrap ICR curves "

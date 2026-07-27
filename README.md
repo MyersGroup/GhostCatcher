@@ -127,13 +127,13 @@ Run it on the bundled example trees (groups `focal` and `B` in `example/poplabel
 python estimate_divergence.py \
     --prefix example/relate_chr --chrs 22 \
     --poplabels example/poplabels.txt --pops focal B \
-    --output output/div_focal_B --epoch_start 3.5 --n_boot 1000
+    --output output/div_focal_B
 ```
 
 This reads `example/relate_chr22.trees` and prints:
 
 ```
-Divergence(focal,B) = 19,063 years (mean of bootstrap)  rCCR threshold in [0.9, 0.9]  95% CI [14,195, 28,151]  (n=1000/1000)
+Divergence(focal,B) = 21,796 years (mean of bootstrap)  rCCR threshold in [0.9, 0.9]  95% CI [14,550, 29,315]  (n=1000/1000)
 ```
 
 `--epoch_start` / `--epoch_end` set the evaluated time window in log10 years (defaults `4` and `6`); the crossing must fall inside it. `--pops` takes two `GROUP` labels from the poplabels file. Optional flags: `--mask1` / `--mask2` restrict a population to sites where each sample's local ancestry (from GhostBuster `*_overall_membership_*` CSVs) exceeds `--local_ancestry_threshold`; `--recomb_map` restricts to low-recombination trees; `--dump_rates` writes the per-bootstrap coalescence-rate curves. Run `python estimate_divergence.py --help` for the full list.
