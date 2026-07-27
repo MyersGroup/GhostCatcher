@@ -302,10 +302,10 @@ def main():
     )
     p.add_argument("--gen", type=float, default=28.0)
     p.add_argument(
-        "--epoch_start", type=float, default=4.0, help="log10 years (recent epoch edge)"
+        "--epoch_start", type=float, default=3.0, help="log10 years (recent epoch edge)"
     )
     p.add_argument(
-        "--epoch_end", type=float, default=6.0, help="log10 years (old epoch edge)"
+        "--epoch_end", type=float, default=7.0, help="log10 years (old epoch edge)"
     )
     p.add_argument("--n_epochs", type=int, default=40)
     p.add_argument("--n_sets", type=int, default=1000)
