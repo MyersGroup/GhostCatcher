@@ -118,6 +118,47 @@ python ld_curve_dating.py \
 - `<output>_<mode>ld_curve_comp1.svg` stores the component-1 focused LD curve.
 - Refit variants are written with `_refit`, for example `<output>_<mode>_refitld_curve.pdf`.
 
+## Estimating population divergence times with `estimate_divergence.py`
+`estimate_divergence.py` estimates the divergence time between two populations from coalescence rates along Relate-inferred (or simulated) trees. It counts within-population (A–A, B–B) and cross-population (A–B) coalescences per local tree, forms the coalescence rates in log-spaced time epochs, and reports the time at which the relative cross-coalescence rate `rCCR(t) = R_AB / (0.5 * (R_AA + R_BB))` rises through `--rccr_threshold` (default 0.9). A 95% CI is obtained by a genomic block bootstrap.
+
+Run it on the bundled example trees (groups `focal` and `B` in `example/poplabels.txt`):
+
+```bash
+python estimate_divergence.py \
+    --prefix example/relate_chr --chrs 22 \
+    --poplabels example/poplabels.txt --pops focal B \
+    --output output/div_focal_B
+```
+
+This reads `example/relate_chr22.trees` and prints:
+
+```
+Divergence(focal,B) = 21,796 years (mean of bootstrap)  rCCR threshold in [0.9, 0.9]  95% CI [14,550, 29,315]  (n=1000/1000)
+```
+
+`--epoch_start` / `--epoch_end` set the evaluated time window in log10 years (defaults `4` and `6`); the crossing must fall inside it. `--pops` takes two `GROUP` labels from the poplabels file. Optional flags: `--mask1` / `--mask2` restrict a population to sites where each sample's local ancestry (from GhostBuster `*_overall_membership_*` CSVs) exceeds `--local_ancestry_threshold`; `--recomb_map` restricts to low-recombination trees; `--dump_rates` writes the per-bootstrap coalescence-rate curves. Run `python estimate_divergence.py --help` for the full list.
+
+## Checking component separation with `pca_silhouette.py`
+`pca_silhouette.py` measures how well-separated GhostBuster's two inferred ancestry components are. Using the per-site coalescence-count matrix from a GhostBuster run, it labels each site by its `k=2` posterior argmax and reports a silhouette score (≈0 = the components are indistinguishable / noise; higher = genuine structure), plus a PCA density plot.
+
+Run it on the output prefix of a GhostBuster run (see [Examples](#examples-10mins) above); the plot path is optional (defaults to `<prefix>_pca.svg`):
+
+```bash
+python pca_silhouette.py output/relate output/relate_pca.svg
+```
+
+This reads `output/relate_fixed_params_chr*_sample*.pkl` and `output/relate_overall_membership_*_sample_id_*.csv` and prints:
+
+```
+SILHOUETTE_NUM 0.0363
+SILHOUETTE_X 0.1560
+NSITES 13164
+NFEATURES 4
+wrote output/relate_pca.svg
+```
+
+`SILHOUETTE_NUM` scores the coalescence-count matrix, `SILHOUETTE_X` the full standardized feature matrix. The low value here is expected for the example, whose haplotypes carry no real second ancestry component.
+
 ## List of options
 ```
 python ghost_buster.py --help
