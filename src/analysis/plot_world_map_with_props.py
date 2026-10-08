@@ -57,7 +57,7 @@ def plot_proportions():
         for file in glob.glob(
             prefix + str(pop) + "_overall_membership_*_sample_id_*.csv"
         ):
-            df = pd.read_csv(file, sep="\s+")
+            df = pd.read_csv(file, sep=r"\s+")
             r = ((df['genpos'].shift(2) - df['genpos'].shift(-2))/(df['pos'].shift(2) - df['pos'].shift(-2)))
             df = df.loc[r < r.quantile(0.5)]
             prop_list.append(100 * (df["prob_1"] > 0.5).mean())
@@ -94,7 +94,7 @@ def plot_proportions():
 
 
 # Data for the African populations
-data = pd.read_csv("afr_lat_long.txt", sep="\s+")
+data = pd.read_csv("afr_lat_long.txt", sep=r"\s+")
 data = data.loc[2:]
 props = plot_proportions()
 data["BTA proportion"] = data["Population"].map(props)

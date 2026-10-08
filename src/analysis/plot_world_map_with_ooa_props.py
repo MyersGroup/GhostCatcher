@@ -118,7 +118,7 @@ def plot_proportions():
 
 
 # Data for the African populations
-data = pd.read_csv("afr_lat_long.txt", sep="\s+")
+data = pd.read_csv("afr_lat_long.txt", sep=r"\s+")
 data = data.loc[2:]
 props = plot_proportions()
 data["BTA proportion"] = data["Population"].map(props)

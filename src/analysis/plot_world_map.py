@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
 
 # Data for the African populations
-data = pd.read_csv("afr_lat_long.txt", sep="\s+")
+data = pd.read_csv("afr_lat_long.txt", sep=r"\s+")
 data = data.loc[2:]
 
 plt.clf()

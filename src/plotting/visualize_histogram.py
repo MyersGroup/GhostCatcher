@@ -40,7 +40,7 @@ if __name__ == "__main__":
     post_file_name = sys.argv[1]
     dfc = []
     for file in glob.glob(post_file_name + "_overall_membership_*_sample_id_*.csv"):
-        df = pd.read_csv(file, sep='\s+')
+        df = pd.read_csv(file, sep=r'\s+')
         dfc.append(df)
     combined_df = pd.concat(dfc, ignore_index=True)
     plot_histogram_from_csv(combined_df, post_file_name)

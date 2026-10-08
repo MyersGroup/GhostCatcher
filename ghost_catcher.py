@@ -850,7 +850,7 @@ def main(args):
             )
             args.num_epochs = len(epoch_intervals) - 1
 
-    poplabels = pd.read_csv(args.poplabels, sep="\s+")
+    poplabels = pd.read_csv(args.poplabels, sep=r"\s+")
     chrs = list(map(int, args.chrs.split(",")))
     print("Considering chromosomes: " + str(chrs))
 
@@ -991,7 +991,7 @@ def main(args):
             mask_dodgy.append(mask_dodgy_sam)
         exact_pos = None
     else:
-        exact_pos = pd.read_csv(args.load_mask, sep="\s+")
+        exact_pos = pd.read_csv(args.load_mask, sep=r"\s+")
         exact_pos = exact_pos[
             exact_pos["chr"].isin(list(map(int, args.chrs.split(","))))
         ]

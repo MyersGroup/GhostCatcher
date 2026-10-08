@@ -339,7 +339,7 @@ def load_gamma(path, groups, ref_groups):
                 ref_groups_to_index.append(np.where(header == g)[0][0])
             except:
                 ref_groups_to_index.append(np.nan)
-        df = pd.read_csv(path, sep="\s+", header=None, skiprows=[0, 1])
+        df = pd.read_csv(path, sep=r"\s+", header=None, skiprows=[0, 1])
         gamma_arr = np.nan * np.ones((len(groups), len(ref_groups), df.shape[1] - 2))
         for i, gid1 in enumerate(groups_to_index):
             for j, gid2 in enumerate(ref_groups_to_index):
@@ -368,7 +368,7 @@ def load_gamma(path, groups, ref_groups):
 #             raise ValueError
 #         groups_to_index = [np.where(header == g)[0][0] for g in groups]
 #         ref_groups_to_index = [np.where(header == g)[0][0] for g in ref_groups]
-#         df = pd.read_csv(path, sep="\s+", header=None, skiprows=[0, 1])
+#         df = pd.read_csv(path, sep=r"\s+", header=None, skiprows=[0, 1])
 #         gamma_arr = np.zeros((len(groups), len(ref_groups), df.shape[1] - 2))
 #         for i, gid1 in enumerate(groups_to_index):
 #             for j, gid2 in enumerate(ref_groups_to_index):

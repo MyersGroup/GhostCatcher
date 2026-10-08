@@ -43,10 +43,10 @@ def get_pr_calibration(post_file_name, gt_file_name, sample_list):
     post_overall = []
     gt_overall = []
     for sample in sample_list:
-        post = pd.read_csv(glob.glob(post_file_name + '_overall_membership_*_sample_id_{0}.csv'.format(sample))[0], sep='\s+')
+        post = pd.read_csv(glob.glob(post_file_name + '_overall_membership_*_sample_id_{0}.csv'.format(sample))[0], sep=r'\s+')
         mean_prop = post[[col for col in post.columns if col.startswith('prob_')]].mean(axis=0)
         post = post.drop(columns=[f'prob_{max_idx}' for max_idx in np.where(mean_prop == mean_prop.max())[0]])
-        gt = pd.read_csv(gt_file_name + '_{0}.csv'.format(sample), sep='\s+')
+        gt = pd.read_csv(gt_file_name + '_{0}.csv'.format(sample), sep=r'\s+')
         gt = gt.rename(columns={f'prob_{i}': f'gt_{i}' for i in range(len([col for col in gt.columns if col.startswith('prob_')]))})
         gt_components = [col for col in gt.columns if col.startswith('gt_')]
         post_components = [col for col in post.columns if col.startswith('prob_')]

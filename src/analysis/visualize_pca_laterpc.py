@@ -39,7 +39,7 @@ post_overall = []
 num_overall = []
 denom_overall = []
 for sample in sample_list:
-    post = pd.read_csv(glob.glob(output_file_name + '_overall_membership_*_sample_id_{0}.csv'.format(sample))[0], sep='\s+')
+    post = pd.read_csv(glob.glob(output_file_name + '_overall_membership_*_sample_id_{0}.csv'.format(sample))[0], sep=r'\s+')
     post_overall.extend(post[['prob_' + str(i) for i in range(post.shape[1] - 3)]].values)
     for chr in chr_list:
         fixed_params_file_name = output_file_name + "_fixed_params_chr{0}_sample{1}.pkl".format(chr, sample)

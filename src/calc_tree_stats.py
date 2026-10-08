@@ -63,13 +63,13 @@ def compute_tree_stats(
         if os.path.isfile(rec + str(chr) + ".txt"):
             recomb_map = pd.read_csv(
                 rec + str(chr) + ".txt",
-                sep="\s+",
+                sep=r"\s+",
             )
             recomb_map_msprime = msprime.RateMap.read_hapmap(rec + str(chr) + ".txt")
         elif os.path.isfile(rec + str(chr) + ".txt.gz"):
             recomb_map = pd.read_csv(
                 rec + str(chr) + ".txt.gz",
-                sep="\s+",
+                sep=r"\s+",
             )
             recomb_map_msprime = msprime.RateMap.read_hapmap(rec + str(chr) + ".txt.gz")
         else:

@@ -50,9 +50,9 @@ for sam_no, sam in enumerate(sample_names[sample_names[0] == pop][1]):
         hgdp_sample_of_interest = local_anc2[0, sam_no]
         for file_no, file in enumerate(glob.glob(f'../recent/{pop.lower()}_cmgrid_overall_membership_{sam}_sample_id_*.csv')):
             if file_no == 0:
-                df_gb = pd.read_csv(file, sep='\s+')
+                df_gb = pd.read_csv(file, sep=r'\s+')
             else:
-                df_gb[['prob_'+str(i) for i in range(df_gb.shape[1]-3)]] += pd.read_csv(file, sep='\s+')[['prob_'+str(i) for i in range(df_gb.shape[1]-3)]]
+                df_gb[['prob_'+str(i) for i in range(df_gb.shape[1]-3)]] += pd.read_csv(file, sep=r'\s+')[['prob_'+str(i) for i in range(df_gb.shape[1]-3)]]
         df_gb = df_gb[df_gb['chr'] == chr]
         start_pos = np.min(np.where(pos > df_gb['pos'].min())[0])
         end_pos = np.max(np.where(pos < df_gb['pos'].max())[0])
