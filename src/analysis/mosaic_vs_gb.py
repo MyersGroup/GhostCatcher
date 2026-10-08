@@ -70,7 +70,7 @@ for sam_no, sam in enumerate(sample_names[sample_names[0] == pop][1]):
     print(sam + " " + str(np.mean(mosaic_local_anc_wg)/2) + " " + str(np.mean(gb_local_anc_wg)/2) + " " + str(stats.pearsonr(mosaic_local_anc_wg, gb_local_anc_wg)[0]))
 
     combined_data = np.vstack((mosaic_local_anc_wg[::20], gb_local_anc_wg[::20]))
-    combined_data = pd.DataFrame(combined_data.T, columns=['Mosaic', 'GhostBuster'])
+    combined_data = pd.DataFrame(combined_data.T, columns=['Mosaic', 'GhostCatcher'])
     positions = np.array(positions)[::20]
     x_values = np.arange(len(mosaic_local_anc_wg[::20]))  # X-axis values for each site
     y_values_mosaic = np.clip(savgol_filter(mosaic_local_anc_wg[::20], window_length=11, polyorder=2), 0, 2)  # Smooth data
@@ -93,11 +93,11 @@ for sam_no, sam in enumerate(sample_names[sample_names[0] == pop][1]):
     ax1.set_xticklabels([''] * len(x_ticks_indices))  # Set empty labels
 
 
-    # Smooth local ancestry for GhostBuster
+    # Smooth local ancestry for GhostCatcher
     ax2.fill_between(x_values, 0, y_values_gb, facecolor='pink', alpha=0.8)
     ax2.fill_between(x_values, y_values_gb, 2, facecolor='green', alpha=0.8)
     ax2.plot(x_values, y_values_gb, color='black')
-    ax2.set_title('GhostBuster', fontsize=20)
+    ax2.set_title('GhostCatcher', fontsize=20)
 
     # Remove axis labels and ticks
     ax2.set_xticks([])
@@ -142,6 +142,6 @@ fig, ax = plt.subplots(1, 1, figsize=(7, 5))
 ax.scatter(global_avg_mosaic, global_avg_gb)
 ax.plot(global_avg_mosaic, reg.predict(global_avg_mosaic), color='red')
 plt.xlabel('Mosaic prop.')
-plt.ylabel('GhostBuster prop.')
-plt.title('OLS fit of Mosaic and GhostBuster ancestry')
+plt.ylabel('GhostCatcher prop.')
+plt.title('OLS fit of Mosaic and GhostCatcher ancestry')
 plt.savefig('mosaic_vs_gb.png', dpi=300)

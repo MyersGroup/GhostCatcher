@@ -1,11 +1,11 @@
-# GhostBuster
+# GhostCatcher
 
 ## About the code
-* `ghost_buster.py`: Main script to run the EM and find ghost populations
+* `ghost_catcher.py`: Main script to run the EM and find ghost populations
 * `src/`: Supporting Python/R code (`plotting/`, `helper/`, and utility modules)
 * `real_data_mask/`: Genome-build mask files used for filtering
 
-Current support: GhostBuster currently only works with Relate-inferred trees.
+Current support: GhostCatcher currently only works with Relate-inferred trees.
 
 ## Installation (~5-10mins)
 ```
@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ```
 mkdir output/
 
-python ghost_buster.py \
+python ghost_catcher.py \
     --genome_build hg37 \
     --trees example/relate_chr \
     --poplabels example/poplabels.txt \
@@ -30,11 +30,11 @@ python ghost_buster.py \
     --output output/relate
 ```
 
-## Running GhostBuster on a SLURM cluster
+## Running GhostCatcher on a SLURM cluster
 You can split the EM inference by chromosome (e.g. via a SLURM array) and then merge all the pickles in one final pass.
 ```
 #SBATCH --array=1-10
-python ghost_buster.py \
+python ghost_catcher.py \
     --genome_build hg37 \
     --trees example/relate_chr \
     --poplabels example/poplabels.txt \
@@ -45,9 +45,9 @@ python ghost_buster.py \
     --only_make_pickle_files
 ```
 
-Once every chromosome has its pickle in `output/relate`, rerun GhostBuster without `--trees` to aggregate:
+Once every chromosome has its pickle in `output/relate`, rerun GhostCatcher without `--trees` to aggregate:
 ```
-python ghost_buster.py \
+python ghost_catcher.py \
     --genome_build hg37 \
     --poplabels example/poplabels.txt \
     --rec example/genetic_map_GRCh37_chr \
@@ -56,8 +56,8 @@ python ghost_buster.py \
     --output output/relate
 ```
 
-## GhostBuster output files
-For an output prefix `--output output/relate` and sample IDs `0 1 2 3` (label `0_1_2_3`), GhostBuster writes:
+## GhostCatcher output files
+For an output prefix `--output output/relate` and sample IDs `0 1 2 3` (label `0_1_2_3`), GhostCatcher writes:
 
 - `output/relate_tree_stats_chr<chr>.pkl`: cached tree statistics per chromosome.
 - `output/relate_fixed_params_chr<chr>_sample<sample>.pkl`: cached fixed parameters.
@@ -91,9 +91,9 @@ and
 `remotes::install_github("leospeidel/relater")`
 
 ## LD dating with `ld_curve_dating.py`
-`ld_curve_dating.py` assumes diploid samples by default and is most reliable when you have at least 2 diploid individuals (4 haplotypes) in the GhostBuster output.
+`ld_curve_dating.py` assumes diploid samples by default and is most reliable when you have at least 2 diploid individuals (4 haplotypes) in the GhostCatcher output.
 
-Run LD-curve dating on GhostBuster local-ancestry CSV outputs:
+Run LD-curve dating on GhostCatcher local-ancestry CSV outputs:
 
 ```bash
 python ld_curve_dating.py \
@@ -120,10 +120,10 @@ python ld_curve_dating.py \
 
 ## List of options
 ```
-python ghost_buster.py --help
+python ghost_catcher.py --help
 ```
 
-The table below lists commonly used options. For the full list, run `python ghost_buster.py --help`.
+The table below lists commonly used options. For the full list, run `python ghost_catcher.py --help`.
 
 | Option                                  | Datatype            | Default        | Description                                                                                                           |
 |-----------------------------------------|---------------------|----------------|-----------------------------------------------------------------------------------------------------------------------|

@@ -139,7 +139,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "-o",
         "--output",
-        help="Output prefix (same as what was used when calling ghost_buster.py)",
+        help="Output prefix (same as what was used when calling ghost_catcher.py)",
         type=str,
         default='ground_truth',
     )

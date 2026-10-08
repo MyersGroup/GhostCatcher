@@ -32,12 +32,12 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
 
-      - name: Run GhostBuster example
+      - name: Run GhostCatcher example
         env:
           MPLCONFIGDIR: ${{ runner.temp }}/mpl
         run: |
           mkdir -p output
-          python ghost_buster.py \
+          python ghost_catcher.py \
             --genome_build hg37 \
             --trees example/relate_chr \
             --poplabels example/poplabels.txt \

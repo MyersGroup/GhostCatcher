@@ -4,7 +4,7 @@ Author: Prof. Simon Myers (myers@stats.ox.ac.uk)
 
 ## What this does
 `fastchromopainter` is a fast C++ chromosome-painting implementation used to infer donor ancestry along haplotypes.  
-Within this repository, it is used as an external/local-ancestry preprocessing component for downstream GhostBuster analyses.
+Within this repository, it is used as an external/local-ancestry preprocessing component for downstream GhostCatcher analyses.
 
 ## Requirements
 - GCC (or compatible `g++`)
